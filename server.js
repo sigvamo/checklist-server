@@ -8,35 +8,35 @@ var dataSource = {
 	id : 1,
 	titel : 'First checklist',
 	version : '1.0.0',
-	sections : { 
-		1 : {
+	sections : [ 
+		{
 		  pos : 1,
           titel : 'Section 1',
-          steps : {
-          	1 : { pos : 1,
+          steps : [
+          	    { pos : 1,
           		  titel: 'Step 1',
           	      content: 'Do something 1'},
-          	2 : { pos : 2,
-          		  titel: null,
-          	      content: 'Do something 1'},
-          	3 : { pos : 3,
+          	    { pos : 3,
           		  titel: 'Step 3',
-          	      content: 'Do something 1'}
-          }
+          	      content: 'Do something 3'},
+          	    { pos : 2,
+          		  titel: 'Step 2',
+          	      content: 'Do something 2'}
+          ]
 		},
-       2 : {
+       {
        	  pos : 2,
           titel : 'Section 2',
-          steps : {
-          	1 : { pos : 1,
+          steps : [
+          	    { pos : 1,
           		  titel: 'Step 1',
           	      content: 'Do something 1'},
-          	2 : { pos : 2,
+          	    { pos : 2,
           		  titel: null,
-          	      content: 'Do something 1'}
-          }
+          	      content: 'Do something 2'}
+          ]
 		}
-	}
+	]
 }
 
 //console.log(dataSource.sections['1'].steps['1'].content)
