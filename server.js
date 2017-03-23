@@ -15,7 +15,33 @@ var dataSource = {
           steps : [
           	    { pos : 1,
           		  titel: 'Step 1',
-          	      content: 'Do something 1'},
+          	      content: 'To make a split mirror backup in SUSPEND mode: \
+Place the database tablespaces in backup mode. For example, to place tablespace users in backup mode, enter:\
+\
+ALTER TABLESPACE users BEGIN BACKUP;\
+If you are backing up all of the tablespaces for your database, you can instead use:\
+\
+ALTER DATABASE BEGIN BACKUP;\
+Caution:\
+Do not use the ALTER SYSTEM SUSPEND statement as a substitute for placing a tablespace in backup mode.\
+If your mirror system has problems with splitting a mirror while disk writes are occurring, then suspend the database. For example, issue the following statement:\
+\
+ALTER SYSTEM SUSPEND;\
+Verify that the database is suspended by querying the V$INSTANCE view. For example:\
+\
+SELECT DATABASE_STATUS FROM V$INSTANCE;\
+\
+DATABASE_STATUS \
+----------------- \
+SUSPENDED \
+Split the mirrors at the operating system or hardware level.\
+\
+End the database suspension. For example, issue the following statement:\
+\
+ALTER SYSTEM RESUME;\
+Establish that the database is active by querying the V$INSTANCE view. For example, enter:\
+\
+SELECT DATABASE_STATUS FROM V$INSTANCE;'},
           	    { pos : 3,
           		  titel: 'Step 3',
           	      content: 'Do something 3'},
