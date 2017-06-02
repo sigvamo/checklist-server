@@ -3,16 +3,25 @@
 var express = require('express')
 var server = express()
 
-/* cid - condition id */
+/* 
+cid - condition id 
+types:
+  0 - Body content
+  1 - Step
+  2 - Input
+  3 - Goto
+  4 - Repeat some step or range of steps and continue 
+*/
 
 var dataSource = {
 	id : 1,
 	titel : 'First checklist',
 	description : 'This is checklist to do something.',
 	version : '1.0.0',
-	variables : [{id: 1, name:'ORACLE_SID', required: true},
-	             {id: 2, name:'ORACLE_HOME', required: true, default: '/home/oracle'},
-	             {id: 3, name:'WORK_DIR', required: true}],
+	variables : [{id: 1, name:'ORACLE_SID', runtime: false, required: true},
+	             {id: 2, name:'ORACLE_HOME', runtime: false, required: true, default: '/home/oracle'},
+	             {id: 3, name:'WORK_DIR', runtime: false, required: true},
+	             {id: 4, name:'myVar', runtime: true, required: true}],
 	body : [
              { beforesec: 0, content: 'It is body text'},
              { beforesec: 2, content: 'It is body text <em><strong>And it is some decorated text</strong></em> before sec 2'},
@@ -70,17 +79,23 @@ var dataSource = {
        {
        	  pos : 2,
           titel : 'Section 2',
+          conditions : [
+            {id: 1, condition: 'VAR[4] > 10'}
+          ],
           contentmeta: [
              {id: 1,  type: 0},
              {id: 2,  type: 1},
              {id: 3,  type: 1},
+             {id: 5,  type: 2, vars: [4], cid: 1},
+             {id: 6,  type: 3, goto: 2, cid: 1},
              {id: 4,  type: 0}
           ],
           contentdata: [
              {id: 1, content: 'It is body <pre><code>function(a){return a+3}</code></pre> text of the section body'},
              {id: 2, titel: 'Titel of step 1', content: 'Content of step 1 $$WORK_DIR$$'},
              {id: 3, content: 'Contetnt of step 2'},
-             {id: 4, content: 'It is body text before $$ORACLE_HOME$$ step 2 of the section body'}
+             {id: 4, content: 'It is body text before $$ORACLE_HOME$$ step 2 of the section body'},
+             {id: 5, content: 'Please enter the value for variable: myVar'}
           ]
 		}
 	]
