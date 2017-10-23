@@ -21,7 +21,11 @@ var dataSource = {
 	variables : [{id: 1, name:'ORACLE_SID', runtime: false, required: true},
 	             {id: 2, name:'ORACLE_HOME', runtime: false, required: true, default: '/home/oracle'},
 	             {id: 3, name:'WORK_DIR', runtime: false, required: true},
-	             {id: 4, name:'myVar', runtime: true, required: true}],
+	             {id: 4, name:'myVar', runtime: true, required: true},
+	             {id: 5, name:'NUM_OF_TAB', runtime: true, required: true},
+	             {id: 6, name:'IS_DONE', runtime: true, required: true, default: 'YES'}
+	             ],
+
 	body : [
              { beforesec: 0, content: 'It is body text'},
              { beforesec: 2, content: 'It is body text <em><strong>And it is some decorated text</strong></em> before sec 2'},
@@ -32,7 +36,8 @@ var dataSource = {
 		  pos : 1,
           titel : 'Section 1',
           conditions : [
-            {id: 1, condition: '1=2'}
+            {id: 1, condition: '1=2'},
+            {id: 2, condition: '$$IS_DONE$$="NO"'}
           ],
           contentmeta: [
              {id: 1,  type: 0 },
@@ -49,6 +54,8 @@ var dataSource = {
              {id: 13, type: 1 },
              {id: 14, type: 1 },
              {id: 15, type: 1 },
+             {id: 30, type: 2, vars: [6]},
+             {id: 29, type: 4, repeat: [1,13], cid: 2},
              {id: 16, type: 0 },
              {id: 17, type: 1 },
              {id: 18, type: 1 },
@@ -72,7 +79,8 @@ var dataSource = {
              {id: 16, content: 'Some content goes here'},
              {id: 17, content: 'Some content goes here'},
              {id: 18, content: 'Some content goes here'},
-             {id: 19, content: 'It is last body text of the section body <pre><code>function(a){return a+3}</code></pre>'}
+             {id: 19, content: 'It is last body text of the section body <pre><code>function(a){return a+3}</code></pre>'},
+             {id: 30, content: 'Is previous steps done?'}
           ]
 
 		},
@@ -80,14 +88,14 @@ var dataSource = {
        	  pos : 2,
           titel : 'Section 2',
           conditions : [
-            {id: 1, condition: 'VAR[4] > 10'}
+            {id: 1, condition: '$$myVar$$ > 10'}
           ],
           contentmeta: [
              {id: 1,  type: 0},
              {id: 2,  type: 1},
              {id: 3,  type: 1},
-             {id: 5,  type: 2, vars: [4], cid: 1},
-             {id: 6,  type: 3, goto: 2, cid: 1},
+             {id: 5,  type: 2, vars: [4,5], cid: 1},
+             {id: 6,  type: 3, goto: 1, cid: 1},
              {id: 4,  type: 0}
           ],
           contentdata: [
@@ -95,7 +103,7 @@ var dataSource = {
              {id: 2, titel: 'Titel of step 1', content: 'Content of step 1 $$WORK_DIR$$'},
              {id: 3, content: 'Contetnt of step 2'},
              {id: 4, content: 'It is body text before $$ORACLE_HOME$$ step 2 of the section body'},
-             {id: 5, content: 'Please enter the value for variable: myVar'}
+             {id: 5, content: 'Please enter the $$ORACLE_HOME$$ value for variable: myVar'}
           ]
 		}
 	]
