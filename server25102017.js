@@ -27,11 +27,9 @@ var dataSource = {
 	             ],
 
 	body : [
-             { content: 'It is body text'},
-             { section: 1},
-             { content: 'It is body text <em><strong>And it is some decorated text</strong></em> before sec 2'},
-             { section: 2},
-             { content: 'It is body text of the end <pre><code>select * from dual;</code></pre>'}
+             { beforesec: 0, content: 'It is body text'},
+             { beforesec: 2, content: 'It is body text <em><strong>And it is some decorated text</strong></em> before sec 2'},
+             { beforesec: -1, content: 'It is body text of the end <pre><code>select * from dual;</code></pre>'}
           ],
 	sections : [
 		{
@@ -97,7 +95,7 @@ var dataSource = {
              {id: 2,  type: 1},
              {id: 3,  type: 1},
              {id: 5,  type: 2, vars: [4,5], cid: 1},
-             {id: 6,  type: 3, goto: 2, cid: 1},
+             {id: 6,  type: 3, goto: 1, cid: 1},
              {id: 4,  type: 0}
           ],
           contentdata: [
